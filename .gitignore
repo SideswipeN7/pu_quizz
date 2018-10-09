@@ -1,2 +1,6 @@
 distribution/*
 implementation/QuizzApp/.vs
+implementation/QuizzApp/QuizzApp.Tests/obj
+implementation/QuizzApp/QuizzApp/QuizzApp.csproj
+implementation/QuizzApp/QuizzApp/QuizzApp.csproj.user
+implementation/QuizzApp/QuizzApp/obj
