@@ -1,8 +1,14 @@
 distribution/*
 implementation/server/.vs
+implementation/server/packages
 implementation/server/QuizzApp.Tests/obj
 implementation/server/QuizzApp/QuizzApp.csproj.user
 implementation/server/QuizzApp/obj
+implementation/server/QuizzApp/bin
+implementation/server/QuizzApp/Fakes
+implementation/server/QuizzApp/FakesAssemblies
+
+
 implementation/android/.idea
 implementation/android/local.properties
 implementation/android/*.iml
