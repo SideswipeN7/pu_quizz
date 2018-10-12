@@ -4,7 +4,18 @@ implementation/server/QuizzApp.Tests/obj
 implementation/server/QuizzApp/QuizzApp.csproj
 implementation/server/QuizzApp/QuizzApp.csproj.user
 implementation/server/QuizzApp/obj
-
+implementation/android/.idea
+implementation/android/local.properties
+implementation/android/*.iml
+implementation/android/.gradle
+implementation/android/local.properties
+implementation/android/.idea/libraries
+implementation/android/.idea/modules.xml
+implementation/android/.idea/workspace.xml
+implementation/android/.DS_Store
+implementation/android/build
+implementation/android/captures
+implementation/android/.externalNativeBuild
 
 *_i.c
 *_p.c
