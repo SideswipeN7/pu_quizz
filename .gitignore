@@ -1,7 +1,6 @@
 distribution/*
 implementation/server/.vs
 implementation/server/QuizzApp.Tests/obj
-implementation/server/QuizzApp/QuizzApp.csproj
 implementation/server/QuizzApp/QuizzApp.csproj.user
 implementation/server/QuizzApp/obj
 implementation/android/.idea
