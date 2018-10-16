@@ -17,31 +17,63 @@
               android:textStyle="bold"
               android:textSize="50sp"
               android:gravity="center"
-              android:text="@string/dummy_content"/>
+              android:text="@string/dummy_content"
+              />
+    <!--<LinearLayout-->
+        <!--android:id="@+id/fullscreen_content_controls"-->
+        <!--style="?metaButtonBarStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="bottom|center_horizontal"-->
+        <!--android:background="@color/black_overlay"-->
+        <!--android:orientation="vertical"-->
+        <!--tools:ignore="UselessParent">-->
 
+
+        <Button
+            android:id="@+id/startGameBtn"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/new_game"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/roundedbutton"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            />
+
+
+        <Button
+            android:id="@+id/topTenBtn"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/top_10"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/roundedbutton"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            />
+
+
+
+        <Button
+            android:id="@+id/exitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/exit"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/roundedbutton"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            />
+
+    <!--</LinearLayout>-->
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:fitsSystemWindows="true">
-
-        <LinearLayout android:id="@+id/fullscreen_content_controls"
-                      style="?metaButtonBarStyle"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_gravity="bottom|center_horizontal"
-                      android:background="@color/black_overlay"
-                      android:orientation="horizontal"
-                      tools:ignore="UselessParent">
-
-            <Button android:id="@+id/dummy_button"
-                    style="?metaButtonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/dummy_button"/>
-
-        </LinearLayout>
-    </FrameLayout>
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fitsSystemWindows="true">-->
+        <!---->
+    <!--</FrameLayout>-->
 
 </FrameLayout>
