@@ -6,4 +6,7 @@
     <string name="new_game">Nowa gra</string>
     <string name="top_10">Top 10</string>
     <string name="exit">Wyjście</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="appName">Quiz</string>
 </resources>
