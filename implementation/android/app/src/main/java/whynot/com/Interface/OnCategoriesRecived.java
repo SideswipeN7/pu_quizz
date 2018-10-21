@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import whynot.com.dto.DtoCategory;
 
-public interface OnRecivedData {
-    public void listner(Function<Void, List<DtoCategory>> function);
+public interface OnCategoriesRecived {
+    void received(List<DtoCategory> data);
+    void failed();
 }

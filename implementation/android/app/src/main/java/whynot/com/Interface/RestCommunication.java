@@ -1,4 +1,4 @@
-package whynot.com.communication;
+package whynot.com.Interface;
 
 import java.util.List;
 
