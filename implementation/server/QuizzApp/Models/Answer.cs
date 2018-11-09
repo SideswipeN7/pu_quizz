@@ -6,15 +6,19 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 namespace QuizzApp.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Answer
     {
-        public long AnswerId { get; set; }
-        public long QuestionId { get; set; }
-        public string Value { get; set; }
-        public bool Correct { get; set; }
-
+        public int IdAnswer { get; set; }
+        public int IdQuestion { get; set; }
+        public string Text { get; set; }
+        public bool Value { get; set; }
+    
         public virtual Question Questions { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model QuizzApp.Models.Question
+﻿@model QuizzApp.Models.Answer
 
 @{
     ViewBag.Title = "Edit";
@@ -12,16 +12,16 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Question</h4>
+        <h4>Answer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IdQuestion)
+        @Html.HiddenFor(model => model.IdAnswer)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdCategory, "IdCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdQuestion, "IdQuestion", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IdCategory", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdCategory, "", new { @class = "text-danger" })
+                @Html.DropDownList("IdQuestion", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdQuestion, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -30,6 +30,16 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Value)
+                    @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 

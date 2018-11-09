@@ -1,4 +1,4 @@
-﻿@model QuizzApp.Models.Question
+﻿@model QuizzApp.Models.Answer
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Question</h4>
+    <h4>Answer</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,16 +19,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Categories.Text)
+            @Html.DisplayNameFor(model => model.Value)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Categories.Text)
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Questions.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Questions.Text)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdQuestion }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdAnswer }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
