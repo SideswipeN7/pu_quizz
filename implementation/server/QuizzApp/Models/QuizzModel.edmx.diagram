@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="573abcd37cc048b6b83644428d55c708" Name="Diagram1">
-        <EntityTypeShape EntityType="quizzDBModel.Answer" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="quizzDBModel.Category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="quizzDBModel.Question" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="quizzDBModel.TopTen" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="quizzDBModel.FK_Answers_ToQuestions" ManuallyRouted="false" />
-        <AssociationConnector Association="quizzDBModel.FK_Questions_ToCategories" ManuallyRouted="false" />
+      <Diagram DiagramId="29e3c6d58b504c9884f5e2124b9d21af" Name="Diagram1">
+        <EntityTypeShape EntityType="quizzModel.Answer" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="quizzModel.Category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quizzModel.Question" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="quizzModel.Score" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="quizzModel.FK_Answers_To_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="quizzModel.FK_Questions_To_Categories" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
-</edmx:Edmx> 
+</edmx:Edmx>

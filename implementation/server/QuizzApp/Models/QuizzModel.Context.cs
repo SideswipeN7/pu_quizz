@@ -6,27 +6,28 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 namespace QuizzApp.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class quizzDBEntities : DbContext
+    
+    public partial class quizzEntities : DbContext
     {
-        public quizzDBEntities()
-            : base("name=quizzDBEntities")
+        public quizzEntities()
+            : base("name=quizzEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
-        public virtual DbSet<TopTen> TopTen { get; set; }
+        public virtual DbSet<Score> Scores { get; set; }
     }
 }

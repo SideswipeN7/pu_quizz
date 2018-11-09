@@ -1,24 +1,29 @@
-﻿using QuizzApp.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using QuizzApp.Models;
 
 namespace QuizzApp.Controllers
 {
-    public class AnswerController : Controller
+    public class AnswersController : Controller
     {
-        private quizzDBEntities db = new quizzDBEntities();
+        private quizzEntities db = new quizzEntities();
 
-        // GET: /Answer/
+        // GET: Answers
         public async Task<ActionResult> Index()
         {
             var answers = db.Answers.Include(a => a.Questions);
             return View(await answers.ToListAsync());
         }
 
-        // GET: /Answer/Details/5
-        public async Task<ActionResult> Details(long? id)
+        // GET: Answers/Details/5
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -32,19 +37,19 @@ namespace QuizzApp.Controllers
             return View(answer);
         }
 
-        // GET: /Answer/Create
+        // GET: Answers/Create
         public ActionResult Create()
         {
-            ViewBag.QuestionId = new SelectList(db.Questions, "QuestionId", "Value");
+            ViewBag.IdQuestion = new SelectList(db.Questions, "IdQuestion", "Text");
             return View();
         }
 
-        // POST: /Answer/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Answers/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "AnswerId,QuestionId,Value,Correct")] Answer answer)
+        public async Task<ActionResult> Create([Bind(Include = "IdAnswer,IdQuestion,Text,Value")] Answer answer)
         {
             if (ModelState.IsValid)
             {
@@ -53,12 +58,12 @@ namespace QuizzApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.QuestionId = new SelectList(db.Questions, "QuestionId", "Value", answer.QuestionId);
+            ViewBag.IdQuestion = new SelectList(db.Questions, "IdQuestion", "Text", answer.IdQuestion);
             return View(answer);
         }
 
-        // GET: /Answer/Edit/5
-        public async Task<ActionResult> Edit(long? id)
+        // GET: Answers/Edit/5
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -69,16 +74,16 @@ namespace QuizzApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.QuestionId = new SelectList(db.Questions, "QuestionId", "Value", answer.QuestionId);
+            ViewBag.IdQuestion = new SelectList(db.Questions, "IdQuestion", "Text", answer.IdQuestion);
             return View(answer);
         }
 
-        // POST: /Answer/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Answers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "AnswerId,QuestionId,Value,Correct")] Answer answer)
+        public async Task<ActionResult> Edit([Bind(Include = "IdAnswer,IdQuestion,Text,Value")] Answer answer)
         {
             if (ModelState.IsValid)
             {
@@ -86,12 +91,12 @@ namespace QuizzApp.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.QuestionId = new SelectList(db.Questions, "QuestionId", "Value", answer.QuestionId);
+            ViewBag.IdQuestion = new SelectList(db.Questions, "IdQuestion", "Text", answer.IdQuestion);
             return View(answer);
         }
 
-        // GET: /Answer/Delete/5
-        public async Task<ActionResult> Delete(long? id)
+        // GET: Answers/Delete/5
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -105,10 +110,10 @@ namespace QuizzApp.Controllers
             return View(answer);
         }
 
-        // POST: /Answer/Delete/5
+        // POST: Answers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(long id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Answer answer = await db.Answers.FindAsync(id);
             db.Answers.Remove(answer);

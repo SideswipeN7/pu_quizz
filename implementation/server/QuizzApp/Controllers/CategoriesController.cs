@@ -1,23 +1,28 @@
-﻿using QuizzApp.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using QuizzApp.Models;
 
 namespace QuizzApp.Controllers
 {
     public class CategoriesController : Controller
     {
-        private quizzDBEntities db = new quizzDBEntities();
+        private quizzEntities db = new quizzEntities();
 
-        // GET: /Categories/
+        // GET: Categories
         public async Task<ActionResult> Index()
         {
             return View(await db.Categories.ToListAsync());
         }
 
-        // GET: /Categories/Details/5
-        public async Task<ActionResult> Details(long? id)
+        // GET: Categories/Details/5
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -31,18 +36,18 @@ namespace QuizzApp.Controllers
             return View(category);
         }
 
-        // GET: /Categories/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Categories/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CategoryId,Name")] Category category)
+        public async Task<ActionResult> Create([Bind(Include = "IdCategory,Text")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -54,8 +59,8 @@ namespace QuizzApp.Controllers
             return View(category);
         }
 
-        // GET: /Categories/Edit/5
-        public async Task<ActionResult> Edit(long? id)
+        // GET: Categories/Edit/5
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -69,12 +74,12 @@ namespace QuizzApp.Controllers
             return View(category);
         }
 
-        // POST: /Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Categories/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CategoryId,Name")] Category category)
+        public async Task<ActionResult> Edit([Bind(Include = "IdCategory,Text")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -85,8 +90,8 @@ namespace QuizzApp.Controllers
             return View(category);
         }
 
-        // GET: /Categories/Delete/5
-        public async Task<ActionResult> Delete(long? id)
+        // GET: Categories/Delete/5
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -100,10 +105,10 @@ namespace QuizzApp.Controllers
             return View(category);
         }
 
-        // POST: /Categories/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(long id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Category category = await db.Categories.FindAsync(id);
             db.Categories.Remove(category);

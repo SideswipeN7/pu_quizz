@@ -6,12 +6,16 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 namespace QuizzApp.Models
 {
-    public partial class TopTen
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Score
     {
         public int Id { get; set; }
-        public string NickName { get; set; }
-        public int Points { get; set; }
+        public int Value { get; set; }
+        public string Name { get; set; }
     }
 }
