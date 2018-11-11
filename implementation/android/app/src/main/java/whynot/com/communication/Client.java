@@ -15,7 +15,7 @@ import whynot.com.Interface.RestCommunication;
 import whynot.com.dto.DtoCategory;
 
 public class Client {
-    private static final String PATH = "";
+    private static final String ADDRESS = "www.quizz.gear.host.com/Android";
     private static final Client ourInstance = new Client();
 
     public static Client getInstance() {
@@ -24,7 +24,7 @@ public class Client {
     private RestCommunication rest;
 
     private Client() {
-        rest = new Retrofit.Builder().baseUrl(PATH).
+        rest = new Retrofit.Builder().baseUrl(ADDRESS).
                 addConverterFactory(GsonConverterFactory.create()).build().create(RestCommunication.class);
     }
 

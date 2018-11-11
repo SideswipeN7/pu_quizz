@@ -1,18 +1,22 @@
 package whynot.com.app;
 
 import whynot.com.dto.DtoAnswer;
+import whynot.com.game.Game;
 
 import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-class App {
+public class App {
     private static final App ourInstance = new App();
     private static final String[]  CONNECTING = {};
     private static final String[] SENDING_DATA = {};
     private Random random;
-    static App getInstance() {
+    private Game game;
+
+
+    public static App getInstance() {
         return ourInstance;
     }
 
@@ -34,4 +38,44 @@ class App {
         return list;
     }
 
+    public int getRandom(int bounds){
+        return  random.nextInt(bounds);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void resetGame() {
+//        game.setCategories();
+//        game.reset();
+    }
+
+    public String getCategory() {
+        return game.getCategory().getName();
+    }
+
+    public String getAnswer(int i) {
+        return game.getQuestion().getAnswers().get(i).getText();
+    }
+
+    public boolean checkAnswer(int index) {
+        return game.getQuestion().getAnswers().get(index).isCorrect();
+    }
+
+    public void setAnswerTime(int time) {
+        game.addPoints(time);
+    }
+
+    public void endGame() {
+    game.end();
+    }
+
+    public int getGameTime() {
+        return game.getQuestionTime();
+    }
+
+    public void NextQuestion() {
+        game.nextQuestion();
+    }
 }
