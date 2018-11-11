@@ -9,4 +9,9 @@
 
     <string name="title_activity_main">MainActivity</string>
     <string name="appName">Quiz</string>
+    <string name="double_back_click">Wciśniej jeszcze raz przycisk wstecz by anulować grę</string>
+    <string name="best_of_the_best">Najlepsi z najlepszych</string>
+    <string name="back">Wstecz</string>
+    <string name="confirm_exit">Napewno chcesz wyjść z gry?</string>
+    <string name="closing">Zamykanie</string>
 </resources>
