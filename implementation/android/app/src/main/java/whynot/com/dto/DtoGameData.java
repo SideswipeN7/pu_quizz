@@ -4,10 +4,14 @@ public class DtoGameData {
     private String name;
     private int value;
 
-    // to delete
-    public DtoGameData(String first, int i) {
-        name= first;
-        value = i;
+    public DtoGameData() {
+        this.name = "";
+        this.value = 0;
+    }
+
+    public DtoGameData(String nick, int points) {
+        name = nick;
+        value = points;
     }
 
     public String getName() {
@@ -25,4 +29,4 @@ public class DtoGameData {
     public void setValue(int value) {
         this.value = value;
     }
-}
+}// class DtoGameData

@@ -85,15 +85,13 @@ public class MainActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle(R.string.closing)
                     .setMessage(R.string.confirm_exit)
-                    .setPositiveButton("Tak", (dialog, which) -> finish())
-                    .setNegativeButton("Nie", (dialogInterface, i) -> {
-                        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-                    })
+                    .setPositiveButton("Tak", (dialog, which) -> System.exit(0))
+                    .setNegativeButton("Nie", (dialogInterface, i) -> mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION))
                     .show();
 
         });
@@ -111,6 +109,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
     }
-}
+
+}// class MainActivity

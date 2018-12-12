@@ -50,6 +50,8 @@ public class TopTenActivity extends AppCompatActivity {
             // Your code here
 //            Toast.makeText(getApplicationContext(), "Works!", Toast.LENGTH_LONG).show();
             // To keep animation for 4 seconds
+            //todo app ask for results
+            //todo get data from list App and load
             new Handler().postDelayed(() -> {
                 // Stop animation (This will be after 3 seconds)
                 mContentView.setRefreshing(false);
@@ -66,8 +68,8 @@ public class TopTenActivity extends AppCompatActivity {
             }
         });
 
-
-        //to delete
+        //todo get data from list App and load
+        //todo if app ready delete
         List<DtoGameData> temp = new ArrayList<>(Arrays.asList(
                 new DtoGameData("Pierwszy", 1122323),
                 new DtoGameData("Drugi", 12331231),
@@ -88,5 +90,4 @@ public class TopTenActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-
-}
+}// class TopTenActivity

@@ -23,14 +23,14 @@ import android.widget.Toast;
 public class LevelActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     Button btnQuestion;
-    //change to table
+    //todo change to table
     Button btnAns1;
     Button btnAns2;
     Button btnAns3;
     Button btnAns4;
     ProgressBar progress;
     boolean makeProgress = true;
-    //    change to app field
+    //todo change to app field
     boolean gameGoing = true;
 
 
@@ -61,12 +61,12 @@ public class LevelActivity extends AppCompatActivity {
         btnAns2 = findViewById(R.id.ans2Btn);
         btnAns3 = findViewById(R.id.ans3Btn);
         btnAns4 = findViewById(R.id.ans4Btn);
-//do uncomment
+//todo do uncomment
 //        int seconds = App.getInstance().getGameTime() * 100;
 //        progress.setMax(seconds);
 //        progress.setProgress(seconds);
 
-        //do delete
+        //todo do delete
         int time = 4 * 100;
         progress.setMax(time);
         progress.setProgress(time);
@@ -103,7 +103,7 @@ public class LevelActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
             endTurn(button, index);
         });
-        //Animate
+        //todo when implemented communication delete below and uncomment second
         animate(button, "asda " + index);
 //       animate(button, App.getInstance().getAnswer(index));
     }
@@ -133,6 +133,7 @@ public class LevelActivity extends AppCompatActivity {
             btnAns3.setClickable(false);
             btnAns4.setClickable(false);
             makeProgress = false;
+            //todo if app ready uncomment code
 //            if (App.getInstance().checkAnswer(index) && index != -1) {
             if (index == 0) {
                 button.setBackgroundColor(Color.GREEN);
@@ -178,12 +179,7 @@ public class LevelActivity extends AppCompatActivity {
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, R.string.double_back_click, Toast.LENGTH_SHORT).show();
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
-}
+
+}// class LevelActivity
