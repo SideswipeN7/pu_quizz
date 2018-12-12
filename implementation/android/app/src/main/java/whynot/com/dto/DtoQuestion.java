@@ -21,4 +21,4 @@ public class DtoQuestion {
     public void setAnswers(List<DtoAnswer> answers) {
         this.answers = answers;
     }
-}
+}// class DtoQuestion

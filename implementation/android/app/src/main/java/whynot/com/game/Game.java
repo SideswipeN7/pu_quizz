@@ -16,6 +16,10 @@ public class Game {
     private DtoQuestion currentQuestion;
     private DtoCategory currentCategory;
 
+    /******************************************************************/
+    /************************ Private Methods *************************/
+    /*****************************************************************/
+
     private void start() {
         //Shuffle data
         Collections.shuffle(categories);
@@ -27,12 +31,16 @@ public class Game {
         } else {
             for (DtoCategory c : categories) {
                 Collections.shuffle(c.getQuestions());
-                for(DtoQuestion q : c.getQuestions()){
+                for (DtoQuestion q : c.getQuestions()) {
                     Collections.shuffle(q.getAnswers());
                 }
             }
         }
     }
+
+    /******************************************************************/
+    /************************ Public Methods *************************/
+    /*****************************************************************/
 
     public void nextQuestion() {
         do {
@@ -74,6 +82,6 @@ public class Game {
     }
 
     public void end() {
-
+    //todo implement how end game
     }
-}
+}// class Game
