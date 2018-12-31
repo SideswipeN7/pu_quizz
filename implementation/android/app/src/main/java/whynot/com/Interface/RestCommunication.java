@@ -10,7 +10,7 @@ import whynot.com.dto.DtoCategory;
 import whynot.com.dto.DtoGameData;
 
 public interface RestCommunication {
-    @GET("Android")
+    @GET("Android/StartGame")
     Call<List<DtoCategory>> getData();
 
     @POST("Android/PostResult")

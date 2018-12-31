@@ -236,7 +236,6 @@
     <Compile Include="Models\Score.cs">
       <DependentUpon>QuizzModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

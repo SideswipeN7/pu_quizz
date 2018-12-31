@@ -8,14 +8,13 @@ using System.Web.Http;
 
 namespace QuizzApp.Controllers
 {
-    [Route("Android")]
     public class AndroidController : ApiController
     {
         private quizzEntities db = new quizzEntities();
 
         // GET: api/Android/StartGame
         [HttpGet]
-        [Route("StartGame")]
+        [Route("Android/StartGame")]
         public IQueryable<DtoCategory> GetGameStart()
         {
             try
@@ -47,7 +46,7 @@ namespace QuizzApp.Controllers
 
         // POST: api/Android/PostResult
         [HttpPost]
-        [Route("PostResult")]
+        [Route("Android/PostResult")]
         public int PostGameResult(DtoGameData data)
         {
             try
@@ -68,7 +67,7 @@ namespace QuizzApp.Controllers
 
         // GET: api/Android/GetResult
         [HttpGet]
-        [Route("GetResult")]
+        [Route("Android/GetResult")]
         public List<DtoGameData> GetGameResult()
         {
             try

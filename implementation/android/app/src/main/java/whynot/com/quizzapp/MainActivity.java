@@ -100,15 +100,20 @@ public class MainActivity extends AppCompatActivity {
         btnStartGame = findViewById(R.id.startGameBtn);
         btnStartGame.setOnClickListener(view -> {
             App app = App.getInstance();
-            app.resetGame();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(new Intent(this, CategoryActivity.class),
-                        ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-            } else {
-                startActivity(new Intent(this, CategoryActivity.class));
-            }
+            app.resetGame(this);
+
+
 
         });
+    }
+
+    public void goToCategory(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, CategoryActivity.class),
+                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, CategoryActivity.class));
+        }
     }
 
 }// class MainActivity

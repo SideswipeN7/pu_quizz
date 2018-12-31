@@ -1,12 +1,16 @@
 package whynot.com.app;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import whynot.com.communication.Client;
 import whynot.com.dto.DtoAnswer;
@@ -15,11 +19,14 @@ import whynot.com.dto.DtoGameData;
 import whynot.com.game.Game;
 import whynot.com.quizzapp.MainActivity;
 
+import java.io.Console;
 import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
+
+import static android.content.ContentValues.TAG;
 
 public class App {
     private static final App ourInstance = new App();
@@ -37,6 +44,7 @@ public class App {
     private Client client_;
     private List<DtoGameData> topTenList_;
     private AlertDialog dialog_;
+    private boolean canContinue_;
 
 
     public static App getInstance() {
@@ -98,9 +106,8 @@ public class App {
         return game_;
     }
 
-    public void resetGame() {
-//        game_.setCategories();
-//        game_.reset();
+    public void resetGame(Activity context) {
+        getData(context);
     }
 
     public void endGame() {
@@ -119,6 +126,7 @@ public class App {
         return game_.getQuestion().getAnswers().get(index).isCorrect();
     }
 
+    public String getQuestion() { return game_.getQuestion().getText();}
     public void setAnswerTime(int time) {
         game_.addPoints(time);
     }
@@ -135,15 +143,17 @@ public class App {
     /*********************** Public Client Methods *******************/
     /*****************************************************************/
 
-    public void getData(Context context) {
-        dialog_ = ProgressDialog.show(context, CONNECTING_TITLE, getRandomConnectingText(), true);
+    public void getData(Activity activity) {
+        dialog_ = ProgressDialog.show(activity, CONNECTING_TITLE, getRandomConnectingText(), true);
         client_.getData((List<DtoCategory> list) -> {
-            dialog_.dismiss();
             game_.setCategories(list);
+            game_.reset();
+            dialog_.dismiss();
+            ((MainActivity) activity).goToCategory();
         }, (fail) -> {
             dialog_.dismiss();
             //show error
-            dialog_ = new AlertDialog.Builder(context)
+            dialog_ = new AlertDialog.Builder(activity)
                     .setTitle(CONNECTING_TITLE)
                     .setMessage(getRandomConnectingError())
                     .setCancelable(false)

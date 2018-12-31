@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import whynot.com.app.App;
+
 public class LevelActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     Button btnQuestion;
@@ -61,17 +63,11 @@ public class LevelActivity extends AppCompatActivity {
         btnAns2 = findViewById(R.id.ans2Btn);
         btnAns3 = findViewById(R.id.ans3Btn);
         btnAns4 = findViewById(R.id.ans4Btn);
-//todo do uncomment
-//        int seconds = App.getInstance().getGameTime() * 100;
-//        progress.setMax(seconds);
-//        progress.setProgress(seconds);
+        int seconds = App.getInstance().getGameTime() * 100;
+        progress.setMax(seconds);
+        progress.setProgress(seconds);
 
-        //todo do delete
-        int time = 4 * 100;
-        progress.setMax(time);
-        progress.setProgress(time);
-
-        animate(btnQuestion, "TEST");
+        animate(btnQuestion, App.getInstance().getQuestion());
 
 
         new Handler().postDelayed(() -> {
@@ -103,9 +99,7 @@ public class LevelActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
             endTurn(button, index);
         });
-        //todo when implemented communication delete below and uncomment second
-        animate(button, "asda " + index);
-//       animate(button, App.getInstance().getAnswer(index));
+       animate(button, App.getInstance().getAnswer(index));
     }
 
     private void animate(Button button, String text) {
@@ -134,24 +128,24 @@ public class LevelActivity extends AppCompatActivity {
             btnAns4.setClickable(false);
             makeProgress = false;
             //todo if app ready uncomment code
-//            if (App.getInstance().checkAnswer(index) && index != -1) {
-            if (index == 0) {
+            if (index != -1 && App.getInstance().checkAnswer(index)) {
+//            if (index == 0) {
                 button.setBackgroundColor(Color.GREEN);
-//                App.getInstance().setAnswerTime(stopProgress());
-//                App.getInstance().NextQuestion();
-//                btnQuestion.setOnClickListener(view -> {
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                        startActivity(new Intent(this, CategoryActivity.class),
-//                                ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-//                    } else {
-//                        startActivity(new Intent(this, CategoryActivity.class));
-//                    }
-//                });
+                App.getInstance().setAnswerTime(stopProgress());
+                App.getInstance().NextQuestion();
+                btnQuestion.setOnClickListener(view -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(new Intent(this, CategoryActivity.class),
+                                ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                    } else {
+                        startActivity(new Intent(this, CategoryActivity.class));
+                    }
+                });
             } else {
                 if (button != null) {
                     button.setBackgroundColor(Color.RED);
                 }
-//                App.getInstance().endGame();
+                App.getInstance().endGame();
                 btnQuestion.setOnClickListener(view -> {
                     //go to end game
 //                    Show  activity to push points

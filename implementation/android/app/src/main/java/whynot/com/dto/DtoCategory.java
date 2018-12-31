@@ -21,4 +21,12 @@ public class DtoCategory {
     public void setQuestions(List<DtoQuestion> questions) {
         this.questions = questions;
     }
+
+    @Override
+    public String toString() {
+        return "DtoCategory{" +
+                "name='" + name + '\'' +
+                ", questions=" + questions +
+                '}';
+    }
 }// class DtoCategory

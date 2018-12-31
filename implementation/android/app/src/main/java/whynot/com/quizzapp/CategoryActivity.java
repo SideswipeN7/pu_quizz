@@ -28,6 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_category);
         btnCategory = findViewById(R.id.categoryBtn);
+        btnCategory.setText(App.getInstance().getCategory());
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -42,7 +43,6 @@ public class CategoryActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
 
-//        btnCategory.setText(App.getInstance().getCategory());
         btnCategory.setOnClickListener(view -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 startActivity(new Intent(this, LevelActivity.class),
