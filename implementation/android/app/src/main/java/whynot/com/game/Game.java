@@ -44,9 +44,11 @@ public class Game {
 
     public void nextQuestion() {
         do {
-            currentCategory = categories.get(App.getInstance().getRandom(categories.size()));
-            currentQuestion = currentCategory.getQuestions().get(App.getInstance().getRandom(categories.size()));
-        } while (currentQuestion != previousQuestion);
+            if(categories != null) {
+                currentCategory = categories.get(App.getInstance().getRandom(categories.size()));
+                currentQuestion = currentCategory.getQuestions().get(App.getInstance().getRandom(categories.size() - 1 ));
+            }
+        } while (currentQuestion == previousQuestion);
         previousQuestion = currentQuestion;
     }
 

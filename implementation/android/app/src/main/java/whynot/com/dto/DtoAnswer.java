@@ -19,4 +19,12 @@ public class DtoAnswer {
     public void setCorrect(boolean correct) {
         isCorrect = correct;
     }
+
+    @Override
+    public String toString() {
+        return "DtoAnswer{" +
+                "text='" + text + '\'' +
+                ", isCorrect=" + isCorrect +
+                '}';
+    }
 }// class DtoAnswer

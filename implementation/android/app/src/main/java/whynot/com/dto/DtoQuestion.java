@@ -18,7 +18,13 @@ public class DtoQuestion {
         return answers;
     }
 
-    public void setAnswers(List<DtoAnswer> answers) {
-        this.answers = answers;
+    public void setAnswers(List<DtoAnswer> answers) { this.answers = answers; }
+
+    @Override
+    public String toString() {
+        return "DtoQuestion{" +
+                "text='" + text + '\'' +
+                ", answers=" + answers +
+                '}';
     }
 }// class DtoQuestion

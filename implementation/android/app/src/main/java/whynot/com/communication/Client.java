@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,8 +16,10 @@ import whynot.com.Interface.RestCommunication;
 import whynot.com.dto.DtoCategory;
 import whynot.com.dto.DtoGameData;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class Client {
-    private static final String ADDRESS = "www.quizz.gear.host.com/Android";
+    private static final String ADDRESS = "http://quizz.gear.host";
     private static final Client instance_ = new Client();
     private RestCommunication rest_;
 
@@ -45,12 +48,14 @@ public class Client {
             @Override
             public void onResponse(Call<List<DtoCategory>> call, Response<List<DtoCategory>> response) {
                 List<DtoCategory> respond = response.body();
+                Log.i(TAG, "onResponse: " + respond);
                 successFunc.accept(respond);
             }
 
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onFailure(Call<List<DtoCategory>> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage() );
                 errorFunc.accept(null);
             }
         });
