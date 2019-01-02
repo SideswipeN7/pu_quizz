@@ -3,12 +3,14 @@ package whynot.com.quizzapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,17 +27,16 @@ import whynot.com.app.App;
 public class LevelActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     Button btnQuestion;
-    //todo change to table
     Button btnAns1;
     Button btnAns2;
     Button btnAns3;
     Button btnAns4;
     ProgressBar progress;
     boolean makeProgress = true;
-    //todo change to app field
     boolean gameGoing = true;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,7 @@ public class LevelActivity extends AppCompatActivity {
 
         animate(btnQuestion, App.getInstance().getQuestion());
 
-
+        App.getInstance().shuffleAnswers();
         new Handler().postDelayed(() -> {
             setButton(btnAns1, 0);
             setButton(btnAns2, 1);
@@ -95,11 +96,12 @@ public class LevelActivity extends AppCompatActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.N)
     void setButton(Button button, int index) {
         button.setOnClickListener(view -> {
             endTurn(button, index);
         });
-       animate(button, App.getInstance().getAnswer(index));
+        animate(button, App.getInstance().getAnswer(index));
     }
 
     private void animate(Button button, String text) {
@@ -118,21 +120,20 @@ public class LevelActivity extends AppCompatActivity {
         oa1.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void endTurn(Button button, int index) {
         if (gameGoing) {
             gameGoing = false;
             btnQuestion.setClickable(true);
-            btnAns1.setClickable(false);
-            btnAns2.setClickable(false);
-            btnAns3.setClickable(false);
-            btnAns4.setClickable(false);
+            btnAns1.setOnClickListener(view -> Toast.makeText(view.getContext(), R.string.click_question, Toast.LENGTH_SHORT).show());
+            btnAns2.setOnClickListener(view -> Toast.makeText(view.getContext(), R.string.click_question, Toast.LENGTH_SHORT).show());
+            btnAns3.setOnClickListener(view -> Toast.makeText(view.getContext(), R.string.click_question, Toast.LENGTH_SHORT).show());
+            btnAns4.setOnClickListener(view -> Toast.makeText(view.getContext(), R.string.click_question, Toast.LENGTH_SHORT).show());
             makeProgress = false;
-            //todo if app ready uncomment code
             if (index != -1 && App.getInstance().checkAnswer(index)) {
-//            if (index == 0) {
                 button.setBackgroundColor(Color.GREEN);
                 App.getInstance().setAnswerTime(stopProgress());
-                App.getInstance().NextQuestion();
+                App.getInstance().nextQuestion();
                 btnQuestion.setOnClickListener(view -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         startActivity(new Intent(this, CategoryActivity.class),
@@ -145,11 +146,7 @@ public class LevelActivity extends AppCompatActivity {
                 if (button != null) {
                     button.setBackgroundColor(Color.RED);
                 }
-                App.getInstance().endGame();
-                btnQuestion.setOnClickListener(view -> {
-                    //go to end game
-//                    Show  activity to push points
-                });
+                btnQuestion.setOnClickListener(view -> App.getInstance().showEndGameDialog(this));
             }
         }
     }
@@ -161,12 +158,7 @@ public class LevelActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(new Intent(this, MainActivity.class),
-                        ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-            } else {
-                startActivity(new Intent(this, MainActivity.class));
-            }
+            goToMain();
             return;
         }
 
@@ -176,4 +168,12 @@ public class LevelActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
+    public void goToMain() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, MainActivity.class),
+                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+    }
 }// class LevelActivity

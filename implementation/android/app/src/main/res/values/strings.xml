@@ -14,4 +14,5 @@
     <string name="back">Wstecz</string>
     <string name="confirm_exit">Napewno chcesz wyjść z gry?</string>
     <string name="closing">Zamykanie</string>
+    <string name="click_question">Kliknij przycisk z pytaniem</string>
 </resources>

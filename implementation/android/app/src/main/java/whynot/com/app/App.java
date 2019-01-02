@@ -2,31 +2,27 @@ package whynot.com.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
+import android.text.InputType;
+import android.widget.EditText;
+
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
 
 import whynot.com.communication.Client;
 import whynot.com.dto.DtoAnswer;
 import whynot.com.dto.DtoCategory;
 import whynot.com.dto.DtoGameData;
 import whynot.com.game.Game;
+import whynot.com.quizzapp.LevelActivity;
 import whynot.com.quizzapp.MainActivity;
-
-import java.io.Console;
-import java.security.SecureRandom;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.function.Consumer;
-
-import static android.content.ContentValues.TAG;
+import whynot.com.quizzapp.TopTenActivity;
 
 public class App {
     private static final App ourInstance = new App();
@@ -39,12 +35,13 @@ public class App {
     private static final String POSITION_TITLE = "Koniec Gry";
     private static final String POSITION_TEXT = "Twoja pozycja to: ";
     private static final String OK_TEXT = "Ok!";
+    private static final String END_GAME_TITLE = "Koniec Gry";
+    private static final String END_GAME_HINT = "Nick";
     private Random random_;
     private Game game_;
     private Client client_;
-    private List<DtoGameData> topTenList_;
+    private List<DtoGameData> topTenList_ = new ArrayList<>();
     private AlertDialog dialog_;
-    private boolean canContinue_;
 
 
     public static App getInstance() {
@@ -93,25 +90,32 @@ public class App {
         return topTenList_;
     }
 
-    public String showTextDialog(Context context) {
-        //create dialog to get user nick and return
-        return "";
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void showEndGameDialog(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(END_GAME_TITLE);
+        // Set up the input
+        final EditText input = new EditText(activity);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setHint(END_GAME_HINT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            String text = input.getText().toString();
+            App.getInstance().pushResult(activity, text, LevelActivity::goToMain);
+        });
+
+        builder.show();
     }
 
     /******************************************************************/
     /***************** Public Game Control Methods *******************/
     /*****************************************************************/
 
-    public Game getGame_() {
-        return game_;
-    }
-
     public void resetGame(Activity context) {
         getData(context);
-    }
-
-    public void endGame() {
-        game_.end();
     }
 
     public String getCategory() {
@@ -126,7 +130,10 @@ public class App {
         return game_.getQuestion().getAnswers().get(index).isCorrect();
     }
 
-    public String getQuestion() { return game_.getQuestion().getText();}
+    public String getQuestion() {
+        return game_.getQuestion().getText();
+    }
+
     public void setAnswerTime(int time) {
         game_.addPoints(time);
     }
@@ -137,6 +144,10 @@ public class App {
 
     public void nextQuestion() {
         game_.nextQuestion();
+    }
+
+    public void shuffleAnswers() {
+        game_.getQuestion().setAnswers(randomizeAnswers(game_.getQuestion().getAnswers()));
     }
 
     /******************************************************************/
@@ -157,55 +168,52 @@ public class App {
                     .setTitle(CONNECTING_TITLE)
                     .setMessage(getRandomConnectingError())
                     .setCancelable(false)
-                    .setPositiveButton(OK_TEXT, (dialog, which) -> {
-                        dialog.dismiss();
-                    }).show();
+                    .setPositiveButton(OK_TEXT, (dialog, which) -> dialog.dismiss()).show();
         });
     }
 
-    public void getTopTen(Context context) {
-        dialog_ = ProgressDialog.show(context, CONNECTING_TITLE, getRandomConnectingText(), true);
+    public void getTopTen(Activity activity) {
+        dialog_ = ProgressDialog.show(activity, CONNECTING_TITLE, getRandomConnectingText(), true);
         client_.getTopTen((List<DtoGameData> list) -> {
             dialog_.dismiss();
             topTenList_ = list;
+            if (activity instanceof MainActivity) {
+                ((MainActivity) activity).goToTopTen();
+            } else if (activity instanceof TopTenActivity) {
+                ((TopTenActivity) activity).refreshList();
+            }
         }, (fail) -> {
             dialog_.dismiss();
             //show error
-            dialog_ = new AlertDialog.Builder(context)
+            dialog_ = new AlertDialog.Builder(activity)
                     .setTitle(CONNECTING_TITLE)
                     .setMessage(getRandomConnectingError())
                     .setCancelable(false)
-                    .setPositiveButton(OK_TEXT, (dialog, which) -> {
-                        dialog.dismiss();
-                    }).show();
+                    .setPositiveButton(OK_TEXT, (dialog, which) -> dialog.dismiss()).show();
         });
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void pushResult(Context context, String nick, Consumer<Void> goToMainFunc) {
-        dialog_ = ProgressDialog.show(context, SENDING_TITLE, getRandomPushingDataText(), true);
+    public void pushResult(Activity activity, String nick, Consumer<LevelActivity> goToMainFunc) {
+        dialog_ = ProgressDialog.show(activity, SENDING_TITLE, getRandomPushingDataText(), true);
         client_.pushData((Integer position) -> {
             dialog_.dismiss();
-            dialog_ = new AlertDialog.Builder(context)
+            dialog_ = new AlertDialog.Builder(activity)
                     .setTitle(POSITION_TITLE)
                     .setMessage(POSITION_TEXT + position)
                     .setCancelable(false)
                     .setPositiveButton(OK_TEXT, (dialog, which) -> {
                         dialog.dismiss();
-                        goToMainFunc.accept(null);
+                        goToMainFunc.accept((LevelActivity) activity);
                     }).show();
         }, (fail) -> {
             dialog_.dismiss();
             //show error
-            dialog_ = new AlertDialog.Builder(context)
+            dialog_ = new AlertDialog.Builder(activity)
                     .setTitle(SENDING_TITLE)
                     .setMessage(getRandomPushingDataError())
                     .setCancelable(false)
-                    .setPositiveButton(OK_TEXT, (dialog, which) -> {
-                        dialog.dismiss();
-                    }).show();
+                    .setPositiveButton(OK_TEXT, (dialog, which) -> dialog.dismiss()).show();
         }, nick, game_.getPoints());
     }
-
 }// class App
