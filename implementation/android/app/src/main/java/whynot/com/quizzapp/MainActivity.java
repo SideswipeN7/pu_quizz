@@ -1,13 +1,10 @@
 package whynot.com.quizzapp;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,29 +19,6 @@ import whynot.com.app.App;
  * status bar and navigation/system bar) with user interaction.
  */
 public class MainActivity extends AppCompatActivity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
-     */
-    private static final int UI_ANIMATION_DELAY = 300;
-    private final Handler mHideHandler = new Handler();
-    private View mContentView;
-    private Button btnStartGame;
-    private Button btnTopTens;
-    private Button btnExit;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        mContentView = findViewById(R.id.fullscreen_content);
 
         View mContentView = findViewById(R.id.fullscreen_content);
         mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
@@ -69,17 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         // Show top tens
-        btnTopTens = findViewById(R.id.topTenBtn);
+        Button btnTopTens = findViewById(R.id.topTenBtn);
         btnTopTens.setOnClickListener(view -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(new Intent(this, TopTenActivity.class),
-                        ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-            } else {
-                startActivity(new Intent(this, TopTenActivity.class));
-            }
+            App.getInstance().getTopTen(this);
         });
+
         // Exit Game
-        btnExit = findViewById(R.id.exitBtn);
+        Button btnExit = findViewById(R.id.exitBtn);
         btnExit.setOnClickListener(view -> {
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -93,21 +62,16 @@ public class MainActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION))
                     .show();
-
         });
 
         //Start Game
-        btnStartGame = findViewById(R.id.startGameBtn);
+        Button btnStartGame = findViewById(R.id.startGameBtn);
         btnStartGame.setOnClickListener(view -> {
-            App app = App.getInstance();
-            app.resetGame(this);
-
-
-
+            App.getInstance().resetGame(this);
         });
     }
 
-    public void goToCategory(){
+    public void goToCategory() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             startActivity(new Intent(this, CategoryActivity.class),
                     ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -116,4 +80,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void goToTopTen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, TopTenActivity.class),
+                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, TopTenActivity.class));
+        }
+    }
 }// class MainActivity

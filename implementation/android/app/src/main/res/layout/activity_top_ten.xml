@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layoutTopTen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc">
+    android:background="#0099cc"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/topTenRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="55dp">
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="10dp"
-            android:layout_weight="2.4"
             android:fontFamily="monospace"
             android:text="@string/best_of_the_best"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textSize="24sp"
             android:textStyle="bold|italic" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-        <ListView
-            android:id="@+id/topTenList"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1" />
+    <ListView
+        android:id="@+id/topTenList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/goBackBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="2.4"
-            android:text="@string/back"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:background="@drawable/roundedbuttonanswer"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="25dp"
-            />
-
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/goBackBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="2.4"
+        android:background="@drawable/roundedbuttonanswer"
+        android:text="@string/back"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
+
+

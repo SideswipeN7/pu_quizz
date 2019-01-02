@@ -44,9 +44,9 @@ public class Game {
 
     public void nextQuestion() {
         do {
-            if(categories != null) {
+            if (categories != null) {
                 currentCategory = categories.get(App.getInstance().getRandom(categories.size()));
-                currentQuestion = currentCategory.getQuestions().get(App.getInstance().getRandom(categories.size() - 1 ));
+                currentQuestion = currentCategory.getQuestions().get(App.getInstance().getRandom(categories.size() - 1));
             }
         } while (currentQuestion == previousQuestion);
         previousQuestion = currentQuestion;
@@ -81,9 +81,5 @@ public class Game {
         previousQuestion = null;
         currentQuestion = null;
         nextQuestion();
-    }
-
-    public void end() {
-    //todo implement how end game
     }
 }// class Game

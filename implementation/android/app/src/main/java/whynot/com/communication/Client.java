@@ -1,11 +1,11 @@
 package whynot.com.communication;
 
-import java.util.List;
-import java.util.function.Consumer;
-
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,7 +55,7 @@ public class Client {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onFailure(Call<List<DtoCategory>> call, Throwable t) {
-                Log.e(TAG, "onFailure: " + t.getMessage() );
+                Log.e(TAG, "onFailure: " + t.getMessage());
                 errorFunc.accept(null);
             }
         });

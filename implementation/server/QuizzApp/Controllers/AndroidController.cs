@@ -73,12 +73,19 @@ namespace QuizzApp.Controllers
             try
             {
                 List<Score> scores = db.Scores.OrderBy(s => s.Value).ToList();
-                return scores.GetRange(0, 10).Select(s => new DtoGameData() { name = s.Name, value = s.Value }).ToList() ;
+                if (scores.Count < 10)
+                {
+                    return scores.Select(s => new DtoGameData() { name = s.Name, value = s.Value }).ToList();
+                }
+                else
+                {
+                    return scores.GetRange(0, 10).Select(s => new DtoGameData() { name = s.Name, value = s.Value }).ToList();
+                }
             }
             catch (Exception ex)
             {
                 Console.Error.Write(ex);
-                return null;
+                return new List<DtoGameData>();
             }
         }
     }

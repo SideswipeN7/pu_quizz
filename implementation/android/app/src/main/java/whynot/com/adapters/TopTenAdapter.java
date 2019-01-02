@@ -28,13 +28,17 @@ public class TopTenAdapter extends ArrayAdapter<DtoGameData> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
-        if(listItem == null) {
+        if (listItem == null) {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.list_view_item, parent, false);
         }
-        DtoGameData data =  list.get(position);
-        ((TextView)listItem.findViewById(R.id.txvNick)).setText(data.getName());
-        ((TextView)listItem.findViewById(R.id.txvPoints)).setText(data.getValue());
+        DtoGameData data = list.get(position);
+        ((TextView) listItem.findViewById(R.id.txvNick)).setText(data.getName());
+        ((TextView) listItem.findViewById(R.id.txvPoints)).setText(data.getValue());
 
         return listItem;
+    }
+
+    public void setList(List<DtoGameData> list) {
+        this.list = list;
     }
 }
