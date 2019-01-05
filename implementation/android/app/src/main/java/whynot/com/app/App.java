@@ -26,10 +26,10 @@ import whynot.com.quizzapp.TopTenActivity;
 
 public class App {
     private static final App ourInstance = new App();
-    private static final String[] CONNECTING = {"Connecting Test 1", "Connecting Test 2", "Connecting Test 3"};
-    private static final String[] CONNECTING_ERROR = {"Connecting ERROR 1", "Connecting ERROR 2", "Connecting ERROR 3"};
-    private static final String[] SENDING_DATA = {"Sending Test 1", "Sending Test 2", "Sending Test 3"};
-    private static final String[] SENDING_ERROR = {"Sending ERROR 1", "Sending ERROR 2", "Sending ERROR 3"};
+    private static final String[] CONNECTING = {"Ładowanie głupich pytań...", "Przygotowywanie kół ratunkowych...", "Ladowanie kolorów...", "Kompilowanie głupich odpowiedzi...", "Obliczanie wieku umysłowego...", "Rejestracja oddechu gracza...", "Pobieranie dat i wydarzeń...", "Układanie pytań...", "Układanie słów i literek...", "Obliczanie BMI gracza...", "Dobieranie fryzury gracza...", "Dobieranie stylizacji gracza...", "Tworzenie śmiesznych tekstów..."};
+    private static final String[] CONNECTING_ERROR = {"Oczekiwanie na ratunek...", "Wprawianie gracza w osłupienie...", "Wystąpił błąd. Co teraz?", "Pobieranie wyników nie udało się."};
+    private static final String[] SENDING_DATA = {"Trzeba czekać...", "Sporządzanie tygodniowego jadłospisu...", "Wysyłanie wyników...", "Oczekiwanie na pomocników...", "Czekanie na sędziego", "Obliczanie punktów IQ"};
+    private static final String[] SENDING_ERROR = {"Błąd. Trzeba czekać...", "Oczekiwanie na ratunek", "Nieudane pobieranie wyników...", "Kompilowanie polskich znaków tekstowych"};
     private static final String CONNECTING_TITLE = "Pobieranie danych";
     private static final String SENDING_TITLE = "Wysyłanie";
     private static final String POSITION_TITLE = "Koniec Gry";
